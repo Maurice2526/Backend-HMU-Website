@@ -120,3 +120,16 @@ app.listen(PORT, () => {
   console.log(`🚀 Server läuft auf Port ${PORT}`);
 });
 
+app.get("/test-room-json", async (req, res) => {
+  try {
+    const roomData = await scrapeRoom();
+    res.json({
+      room: roomData.room,
+      status: roomData.status,
+      currentBooking: roomData.currentBooking,
+      futureEvents: roomData.futureEvents
+    });
+  } catch (err) {
+    res.status(500).json({ error: "Fehler beim Scrapen", message: err.message });
+  }
+});
