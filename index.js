@@ -107,8 +107,6 @@ setInterval(updateCache, UPDATE_INTERVAL);
    API / Proxy
 ========================= */
 
-import fetch from "node-fetch"; // nur nötig, falls Node < 18
-
 // Proxy für Frontend (um CORS zu vermeiden)
 app.get("/api/rooms-proxy", async (req, res) => {
   try {
@@ -120,5 +118,10 @@ app.get("/api/rooms-proxy", async (req, res) => {
     res.status(500).json({ error: "Daten konnten nicht geladen werden" });
   }
 });
+
+app.listen(PORT, () => {
+  console.log(`🚀 Server läuft auf Port ${PORT}`);
+});
+
 
 
