@@ -104,19 +104,21 @@ updateCache();
 setInterval(updateCache, UPDATE_INTERVAL);
 
 /* =========================
-   API
+   API / Proxy
 ========================= */
 
-app.get("/api/rooms", (req, res) => {
-  res.json(cache);
+import fetch from "node-fetch"; // nur nötig, falls Node < 18
+
+// Proxy für Frontend (um CORS zu vermeiden)
+app.get("/api/rooms-proxy", async (req, res) => {
+  try {
+    // Hier holen wir die Daten vom Scraper-Server
+    // (wenn du alles in einem Server hast, kannst du einfach `cache` senden)
+    res.json(cache);
+  } catch (err) {
+    console.error("❌ Fehler beim Laden der Räume:", err);
+    res.status(500).json({ error: "Daten konnten nicht geladen werden" });
+  }
 });
 
-/* Healthcheck (wichtig für Render) */
-app.get("/", (req, res) => {
-  res.send("Trainex Backend läuft 🚀");
-});
-
-app.listen(PORT, () => {
-  console.log(`🚀 Server läuft auf Port ${PORT}`);
-});
 
