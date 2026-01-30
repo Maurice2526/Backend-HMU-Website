@@ -20,7 +20,7 @@ const ROOMS = [
   {
     id: "P4.34",
     name: "P4.34",
-    url: "https://www.trainex32.de/hmu24/public/ress_qr.cfm?con=782547&29SB"
+    url: "https://www.trainex32.de/hmu24/public/ress_qr.cfm?con=781854&secur=3SB"
   }
 ];
 
@@ -129,6 +129,7 @@ app.get("/api/rooms-proxy", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`🚀 Server läuft auf Port ${PORT}`);
 });
+
 
 
 
